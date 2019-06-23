@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "717870855922",
+    "firebase_url": "https://pucom-aa4dc.firebaseio.com",
+    "project_id": "pucom-aa4dc",
+    "storage_bucket": "pucom-aa4dc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:717870855922:android:12410856c1944817",
+        "android_client_info": {
+          "package_name": "com.pucom"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "717870855922-gd540rf0uii2ba5jonac0a179sn2dhi2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pucom",
+            "certificate_hash": "83ef30699eb0151fc6e80a7d239814c1e1418df7"
+          }
+        },
+        {
+          "client_id": "717870855922-7ps33i5v9rcqaof6ej56kelgb21oiur9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pucom",
+            "certificate_hash": "5cceb1df85b56f8c32e26782a01317d7f0e1ffca"
+          }
+        },
+        {
+          "client_id": "717870855922-ruar0dae09rbcug73hmvjumpaje9gset.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeichpGJlgGJdRGiv-gLBDRFi1r6pqEcY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "717870855922-ruar0dae09rbcug73hmvjumpaje9gset.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
