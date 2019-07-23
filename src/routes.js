@@ -13,7 +13,10 @@ import {
 
 import Home from '~/pages/Home';
 import Stores from '~/pages/Stores';
+import MyProfile from '~/pages/MyProfile';
+
 import SignInScreen from '~/pages/SignInScreen';
+import SlidesApresentation from '~/pages/SlidesApresentation';
 
 import AuthLoadingScreen from '~/pages/AuthLoadingScreen';
 
@@ -25,7 +28,9 @@ const AppStack = createBottomTabNavigator(
         title: 'Home',
 
         // eslint-disable-next-line react/prop-types
-        tabBarIcon: ({ tintColor }) => <Icon size={24} name="ticket-alt" style={{ color: tintColor }} />,
+        tabBarIcon: ({ tintColor }) => (
+          <Icon size={24} name="ticket-alt" style={{ color: tintColor }} />
+        ),
       },
     },
 
@@ -34,7 +39,9 @@ const AppStack = createBottomTabNavigator(
       navigationOptions: {
         title: 'Stores',
         // eslint-disable-next-line react/prop-types
-        tabBarIcon: ({ tintColor }) => <Icon size={24} name="search" style={{ color: tintColor }} />,
+        tabBarIcon: ({ tintColor }) => (
+          <Icon size={24} name="search" style={{ color: tintColor }} />
+        ),
       },
     },
 
@@ -43,19 +50,22 @@ const AppStack = createBottomTabNavigator(
       navigationOptions: {
         title: 'Stores',
         // eslint-disable-next-line react/prop-types
-        tabBarIcon: ({ tintColor }) => <Icon size={24} name="map-marked-alt" style={{ color: tintColor }} />,
+        tabBarIcon: ({ tintColor }) => (
+          <Icon size={24} name="map-marked-alt" style={{ color: tintColor }} />
+        ),
       },
     },
 
     User: {
-      screen: Stores,
+      screen: MyProfile,
       navigationOptions: {
-        title: 'Stores',
+        title: 'Meu Perfil',
         // eslint-disable-next-line react/prop-types
-        tabBarIcon: ({ tintColor }) => <Icon size={24} name="user-alt" style={{ color: tintColor }} />,
+        tabBarIcon: ({ tintColor }) => (
+          <Icon size={24} name="user-alt" style={{ color: tintColor }} />
+        ),
       },
     },
-
   },
   {
     tabBarOptions: {
@@ -68,16 +78,17 @@ const AppStack = createBottomTabNavigator(
 
 const AuthStack = createStackNavigator({ SignInScreen });
 
-const Routes = createAppContainer(createSwitchNavigator(
-  {
-    AuthLoading: AuthLoadingScreen,
-    App: AppStack,
-    Auth: AuthStack,
-  },
-  {
-    initialRouteName: 'AuthLoading',
-  },
-));
-
+const Routes = createAppContainer(
+  createSwitchNavigator(
+    {
+      AuthLoading: AuthLoadingScreen,
+      App: AppStack,
+      Auth: AuthStack,
+    },
+    {
+      initialRouteName: 'AuthLoading',
+    },
+  ),
+);
 
 export default Routes;

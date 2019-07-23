@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 
 import {
-  View, AsyncStorage, Text, Image, TouchableOpacity, ScrollView, Button,
+  View,
+  AsyncStorage,
+  Text,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+  Button,
 } from 'react-native';
 
 import styles from './styles';
@@ -14,11 +20,9 @@ import send from '../../assets/img/send.png';
 import ButtonGoogle from '~/components/ButtonGoogle';
 
 class SignInScreen extends Component {
-
   static navigationOptions = {
     header: null,
   };
-
 
   signInAsync = async () => {
     await AsyncStorage.setItem('userToken', 'abc');
@@ -28,7 +32,6 @@ class SignInScreen extends Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-
         <View style={styles.header}>
           <View style={styles.trace}>
             <Image style={styles.traceIcon} source={cut} />
@@ -49,7 +52,7 @@ class SignInScreen extends Component {
             <Text style={styles.loginText}> Login </Text>
           </TouchableOpacity>
 
-          <ButtonGoogle />
+          <ButtonGoogle navi={this.props.navigation} />
 
           <TouchableOpacity style={styles.btnPucom}>
             <Text style={styles.loginText}> Login Pucom </Text>
@@ -57,7 +60,6 @@ class SignInScreen extends Component {
           </TouchableOpacity>
         </View>
       </ScrollView>
-
     );
   }
 }

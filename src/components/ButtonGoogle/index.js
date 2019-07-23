@@ -1,35 +1,54 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
-  View, TouchableOpacity, Image, Text,
+  View, TouchableOpacity, Image, Text, AsyncStorage,
 } from 'react-native';
 
 import { GoogleSignin } from 'react-native-google-signin';
 
 import Reactotron from 'reactotron-react-native';
+import setUserOnStorage from '../../aux/setUserOnStorage';
+
 import google from '../../assets/img/google.png';
 
 import styles from './styles';
 
-export default function ButtonGoogle() {
-  async function handleSubmit() {
+class ButtonGoogle extends Component {
+  static navigationOptions = {
+    header: null,
+  };
+
+  handleSubmit = async () => {
     try {
-      await GoogleSignin.configure();
       await GoogleSignin.hasPlayServices();
+      await GoogleSignin.configure();
       const userInfo = await GoogleSignin.signIn();
-      // Chamar api aqui, passando userInfo
-      Reactotron.log(userInfo);
+
+      await setUserOnStorage(userInfo);
+
+      this.props.navi.navigate('App');
     } catch (error) {
-      Reactotron.log(error);
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        // user cancelled the login flow
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        // operation (f.e. sign in) is in progress already
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        // play services not available or outdated
+      } else {
+        // some other error happened
+      }
     }
+  };
+
+  render() {
+    return (
+      <View>
+        <TouchableOpacity style={styles.btnGoogle} onPress={this.handleSubmit}>
+          <Image source={google} />
+          <Text style={styles.loginText}> Login </Text>
+        </TouchableOpacity>
+      </View>
+    );
   }
-
-  return (
-    <View>
-      <TouchableOpacity style={styles.btnGoogle} onPress={() => handleSubmit()}>
-        <Image source={google} />
-        <Text style={styles.loginText}> Login </Text>
-
-      </TouchableOpacity>
-    </View>
-  );
 }
+
+export default ButtonGoogle;

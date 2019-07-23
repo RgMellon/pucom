@@ -1,16 +1,11 @@
 import React from 'react';
-import {
-  ActivityIndicator,
-  AsyncStorage,
-  View,
-} from 'react-native';
+import { ActivityIndicator, AsyncStorage, View } from 'react-native';
 
 class AuthLoadingScreen extends React.Component {
   constructor(props) {
     super(props);
     this.bootstrapAsync();
   }
-
 
   bootstrapAsync = async () => {
     const userToken = await AsyncStorage.getItem('userToken');
