@@ -1,127 +1,58 @@
-import { StyleSheet } from 'react-native';
+import styled from 'styled-components/native';
+import LinearGradient from 'react-native-linear-gradient';
 
-export default StyleSheet.create({
+export const Container = styled(LinearGradient).attrs({
+  colors: ['#320061', '#954cbf'],
+})`
+  flex: 1;
+  align-items: center;
+  padding: 20px;
+`;
 
-  container: {
-    flex: 1,
-    backgroundColor: '#6400F2',
-  },
+export const Logo = styled.Image`
+  width: 250px;
+  height: 130px;
+  margin-top: 20px;
+`;
 
-  header: {
-    backgroundColor: '#6400F2',
-    height: 270,
-    alignItems: 'center',
-    justifyContent: 'center',
-    // borderBottomRightRadius: 10,
-    // borderBottomLeftRadius: 10,
-  },
+export const Title = styled.Text`
+  color: #fff;
+  font-size: 30px;
+  margin-top: 60px;
+  text-align: center;
+  font-weight: bold;
+`;
 
-  subTitle: {
-    marginTop: 30,
-    color: '#6400F2',
-    borderBottomColor: '#6400F2',
-    borderBottomWidth: 2,
-    fontFamily: 'NunitoSans',
+export const ButtonRegister = styled.TouchableOpacity`
+  width: 300px;
+  height: 60px;
+  border-radius: 100px;
+  background: #f7dd2d;
+  margin-top: 90px;
 
-  },
+  justify-content: center;
+  align-items: center;
+`;
 
-  wrapperLogin: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 5,
-    marginBottom: 20,
-  },
+export const TextButtonRegister = styled.Text`
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+`;
 
-  textLogin: {
-    color: '#fff',
-    fontSize: 20,
-    fontFamily: 'NunitoSans',
+export const ButtonSigIn = styled.TouchableOpacity`
+  width: 300px;
+  height: 60px;
+  border-radius: 100px;
+  background: #fff;
+  margin-top: 20px;
 
-  },
+  justify-content: center;
+  align-items: center;
+`;
 
-  trace: {
-    height: 200,
-    width: '90%',
-    borderStyle: 'dashed',
-    borderWidth: 1.5,
-    borderColor: '#CCC',
-    borderRadius: 4,
-  },
-
-  traceIcon: {
-    marginLeft: -10,
-    marginTop: 40,
-    width: 20,
-    height: 20,
-  },
-
-  wrapperLogo: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: -27,
-  },
-
-  btnFacebook: {
-    height: 60,
-    width: '90%',
-    backgroundColor: '#1774EB',
-    borderRadius: 3,
-    marginTop: 50,
-
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 10,
-    alignItems: 'center',
-  },
-
-  btnGoogle: {
-    height: 60,
-    width: '90%',
-    backgroundColor: '#EA4335',
-    borderRadius: 3,
-    marginTop: 40,
-
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 10,
-    alignItems: 'center',
-  },
-
-  btnPucom: {
-    height: 60,
-    width: '90%',
-    backgroundColor: '#F7DD2D',
-    borderRadius: 3,
-    marginTop: 40,
-    marginBottom: 40,
-
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 10,
-    alignItems: 'center',
-  },
-
-  buttonsLogin: {
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    borderTopLeftRadius: 15,
-    borderTopRightRadius: 15,
-  },
-
-  loginText: {
-    fontFamily: 'NunitoSans',
-    color: '#fff',
-    marginRight: 80,
-    fontSize: 18,
-  },
-
-  input: {
-    borderRadius: 4,
-    borderWidth: 1,
-    borderColor: '#ddd',
-    padding: 15,
-    marginTop:80,
-    fontSize: 16,
-  },
-
-});
+export const TextButtonSignIn = styled.Text`
+  color: #000;
+  font-size: 16px;
+  font-weight: bold;
+`;

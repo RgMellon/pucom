@@ -1,67 +1,48 @@
-import React, { Component } from 'react';
-
-import {
-  View,
-  AsyncStorage,
-  Text,
-  Image,
-  TouchableOpacity,
-  ScrollView,
-  Button,
-} from 'react-native';
-
-import styles from './styles';
-
-import cut from '../../assets/img/cut.png';
-import logo from '../../assets/img/logo.png';
-import facebook from '../../assets/img/facebook.png';
-import send from '../../assets/img/send.png';
+import React from 'react';
 
 import ButtonGoogle from '~/components/ButtonGoogle';
 
-class SignInScreen extends Component {
-  static navigationOptions = {
-    header: null,
-  };
+import {
+  Container,
+  Logo,
+  Title,
+  ButtonRegister,
+  TextButtonRegister,
+  ButtonSigIn,
+  TextButtonSignIn,
+} from './styles';
 
-  signInAsync = async () => {
-    await AsyncStorage.setItem('userToken', 'abc');
-    this.props.navigation.navigate('App');
-  };
+import logo from '~/assets/img/logo.png';
 
-  render() {
-    return (
-      <ScrollView style={styles.container}>
-        <View style={styles.header}>
-          <View style={styles.trace}>
-            <Image style={styles.traceIcon} source={cut} />
-            <View style={styles.wrapperLogo}>
-              <Image source={logo} style={styles.logo} />
-            </View>
-          </View>
-        </View>
+function SignInScreen({ navigation }) {
+  // async function signInAsync() {
+  //   await AsyncStorage.setItem('userToken', 'abc');
+  //   this.props.navigation.navigate('App');
+  // }
 
-        <View style={styles.wrapperLogin}>
-          <Text style={styles.textLogin}> Fazer Login </Text>
-        </View>
-
-        <View style={styles.buttonsLogin}>
-          <Text style={styles.subTitle}> Ainda não tenho uma conta </Text>
-          <TouchableOpacity style={styles.btnFacebook} onPress={this.signInAsync}>
-            <Image source={facebook} />
-            <Text style={styles.loginText}> Login </Text>
-          </TouchableOpacity>
-
-          <ButtonGoogle navi={this.props.navigation} />
-
-          <TouchableOpacity style={styles.btnPucom}>
-            <Text style={styles.loginText}> Login Pucom </Text>
-            <Image source={send} />
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-    );
+  function handleNavToRegister() {
+    navigation.navigate('Register');
   }
+
+  function handleLogin() {
+    navigation.navigate('SignIn');
+  }
+
+  return (
+    <Container>
+      <Logo source={logo} />
+      <Title>Promoções estão esperando por você, vem com a gente!</Title>
+      <ButtonRegister onPress={handleNavToRegister}>
+        <TextButtonRegister> CADASTRE-SE GRÁTIS </TextButtonRegister>
+      </ButtonRegister>
+
+      <ButtonGoogle />
+
+      <ButtonSigIn onPress={handleLogin}>
+        <TextButtonSignIn> ENTRAR </TextButtonSignIn>
+      </ButtonSigIn>
+    </Container>
+  );
 }
 
 export default SignInScreen;

@@ -1,91 +1,89 @@
-import { StyleSheet } from 'react-native';
+import styled from 'styled-components';
 
-export default StyleSheet.create({
+export const Container = styled.View`
+  margin-top: 20px;
+`;
 
-  container: {
-    marginTop: 20,
-  },
+export const BoxImage = styled.View`
+  height: 222px;
+  border-width: 1px;
+  border-color: #fafafa;
+`;
 
-  description: {
-    // flex: 1,
-    backgroundColor: '#6400F2',
-    paddingHorizontal: 10,
-    height: 150,
-    // marginTop: 20,
-    position: 'relative',
-    flexDirection: 'row',
-    borderRadius: 5,
-    marginBottom: 10,
-  },
+export const ImageItem = styled.Image`
+  flex: 1;
+`;
 
-  imageWrapper: {
-    height: 222,
-    borderWidth: 1,
-    borderColor: '#fafafa',
-  },
+export const InfoCupom = styled.View`
+  flex: 1;
+  background-color: #6400f2;
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 150px;
+  position: relative;
+  flex-direction: row;
+  border-radius: 5px;
+  margin-bottom: 10px;
+`;
 
-  detailLeft: {
-    width: 30,
-    height: 30,
-    borderRadius: 80,
-    position: 'absolute',
-    backgroundColor: '#fafafa',
-    marginLeft: -18,
-    marginTop: 69,
-  },
+export const DetailOnCuponRight = styled.View`
+  width: 30px;
+  height: 30px;
+  border-radius: 80px;
+  position: absolute;
+  background-color: #fafafa;
+  right: -18px;
+  margin-top: 69px;
+`;
 
-  detailRight: {
-    width: 30,
-    height: 30,
-    borderRadius: 80,
-    position: 'absolute',
-    backgroundColor: '#fafafa',
-    right: -18,
-    marginTop: 69,
-  },
+export const DetailOnCuponLeft = styled.View`
+  width: 30px;
+  height: 30px;
+  border-radius: 80px;
+  position: absolute;
+  background-color: #fafafa;
+  margin-left: -18px;
+  margin-top: 69px;
+`;
 
-  discount: {
-    width: 75,
-    height: 75,
-    borderRadius: 80,
-    backgroundColor: '#F7DD2D',
-    borderStyle: 'dashed',
-    borderWidth: 1.5,
-    borderColor: '#fff',
-    marginTop: 5,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+export const Discount = styled.View`
+  width: 75px;
+  height: 75px;
+  border-radius: 80px;
+  background-color: #f7dd2d;
+  border-style: dashed;
+  border-width: 1.5px;
+  border-color: #fff;
+  margin-top: 5px;
+  justify-content: center;
+  align-items: center;
+`;
 
-  discountPrice: {
-    color: '#000',
-    fontWeight: 'bold',
-    fontSize: 18,
-  },
+export const MoreInfoCupon = styled.View`
+  align-items: center;
+`;
 
-  storeName: {
-    marginTop: 20,
-    color: 'white',
-    fontSize: 21,
-    fontWeight: 'bold',
-    // textAlign: 'center',
-  },
+export const Title = styled.Text`
+  margin-top: 20px;
+  color: #fff;
+  font-size: 21px;
+  font-weight: bold;
+`;
 
-  info: {
-    // marginLeft: 40,
-    alignItems: 'center',
-  },
+export const Validate = styled.Text`
+  font-size: 17px;
+  color: #fff;
+  margin-top: 15px;
+`;
 
-  itemDiscount: {
-    marginTop: 15,
-    fontSize: 17,
-    color: '#fff',
-  },
+export const DiscountValue = styled.Text`
+  margin-top: 15px;
+  font-size: 17px;
+  color: #fff;
+`;
 
-  validate: {
-    fontSize: 17,
-    color: '#fff',
-    marginTop: 15,
-  },
-
-});
+export const DiscountPercent = styled.Text`
+  color: #000;
+  font-weight: bold;
+  font-size: 18px;
+`;

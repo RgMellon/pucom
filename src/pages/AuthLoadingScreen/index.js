@@ -1,24 +1,16 @@
 import React from 'react';
-import { ActivityIndicator, AsyncStorage, View } from 'react-native';
+import { View } from 'react-native';
+import { useSelector } from 'react-redux';
 
-class AuthLoadingScreen extends React.Component {
-  constructor(props) {
-    super(props);
-    this.bootstrapAsync();
-  }
+function AuthLoadingScreen({ navigation }) {
+  const isSigned = useSelector(state => state.auth.signed);
+  navigation.navigate(isSigned ? 'App' : 'Auth');
 
-  bootstrapAsync = async () => {
-    const userToken = await AsyncStorage.getItem('userToken');
-    this.props.navigation.navigate(userToken ? 'App' : 'Auth');
-  };
-
-  render() {
-    return (
-      <View>
-        <ActivityIndicator size="large" color="#0000ff" />
-      </View>
-    );
-  }
+  return (
+    <View
+      style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
+    ></View>
+  );
 }
 
 export default AuthLoadingScreen;

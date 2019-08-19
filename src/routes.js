@@ -14,11 +14,12 @@ import {
 import Home from '~/pages/Home';
 import Stores from '~/pages/Stores';
 import MyProfile from '~/pages/MyProfile';
+import DetailCupom from '~/pages/DetailPucom';
 
+import Register from '~/pages/Register';
 import SignInScreen from '~/pages/SignInScreen';
-import SlidesApresentation from '~/pages/SlidesApresentation';
 
-import AuthLoadingScreen from '~/pages/AuthLoadingScreen';
+import SignIn from '~/pages/SignIn';
 
 const AppStack = createBottomTabNavigator(
   {
@@ -26,6 +27,7 @@ const AppStack = createBottomTabNavigator(
       screen: Home,
       navigationOptions: {
         title: 'Home',
+        header: null,
 
         // eslint-disable-next-line react/prop-types
         tabBarIcon: ({ tintColor }) => (
@@ -69,26 +71,46 @@ const AppStack = createBottomTabNavigator(
   },
   {
     tabBarOptions: {
-      activeTintColor: '#6400F2',
-      inactiveTintColor: 'black',
+      activeTintColor: '#F8F8F8', // active icon color
+      inactiveTintColor: '#586589', // inactive icon color
       showLabel: false,
+      style: {
+        backgroundColor: '#320050',
+        borderTopRightRadius: 20,
+        borderTopLeftRadius: 20,
+      },
     },
+  }
+);
+
+const AuthStack = createSwitchNavigator(
+  {
+    SignInScreen,
+    Register,
+    SignIn,
   },
+  {
+    defaultNavigationOptions: {
+      header: null,
+    },
+  }
 );
 
-const AuthStack = createStackNavigator({ SignInScreen });
-
-const Routes = createAppContainer(
-  createSwitchNavigator(
-    {
-      AuthLoading: AuthLoadingScreen,
-      App: AppStack,
-      Auth: AuthStack,
-    },
-    {
-      initialRouteName: 'AuthLoading',
-    },
-  ),
-);
-
-export default Routes;
+export default (isSigned = false) =>
+  createAppContainer(
+    createStackNavigator(
+      {
+        App: AppStack,
+        Auth: AuthStack,
+        DetailCupom,
+      },
+      {
+        defaultNavigationOptions: {
+          header: null,
+        },
+      },
+      {
+        initialRouteName: isSigned ? 'App' : 'Auth',
+      }
+    )
+  );

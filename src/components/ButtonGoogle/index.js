@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import {
-  View, TouchableOpacity, Image, Text, AsyncStorage,
+  View,
+  TouchableOpacity,
+  Image,
+  Text,
+  AsyncStorage,
 } from 'react-native';
 
 import { GoogleSignin } from 'react-native-google-signin';
 
-import Reactotron from 'reactotron-react-native';
 import setUserOnStorage from '../../aux/setUserOnStorage';
 
 import google from '../../assets/img/google.png';
@@ -44,7 +47,7 @@ class ButtonGoogle extends Component {
       <View>
         <TouchableOpacity style={styles.btnGoogle} onPress={this.handleSubmit}>
           <Image source={google} />
-          <Text style={styles.loginText}> Login </Text>
+          <Text style={styles.loginText}> LOGIN GOOGLE </Text>
         </TouchableOpacity>
       </View>
     );

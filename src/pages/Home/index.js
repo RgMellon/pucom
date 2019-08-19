@@ -1,23 +1,63 @@
-import React from 'react';
-import { View, ScrollView } from 'react-native';
+import React, { useState, useEffect } from 'react';
 
-import styles from './styles';
+import PropTypes from 'prop-types';
 
-// import { Container } from './styles';
-import Header from '../../components/Header';
-import Ticket from '../../components/Ticket';
-import Categories from '../../components/Categories';
+import api from '~/services/api';
 
-export default function Home() {
+import { Container, ListCategories, ListCoupons } from './styles';
+import Cupom from '../../components/Cupom';
+import Category from '../../components/Category';
+import Header from '~/components/Header';
+
+export default function Home({ navigation }) {
+  const [coupons, setCoupons] = useState([]);
+
+  useEffect(() => {
+    async function getCoupons() {
+      try {
+        const response = await api.get('coupon/index');
+        const allCoupons = response.data;
+
+        if (allCoupons.status) {
+          setCoupons(allCoupons.coupons.data);
+        }
+
+        // const { coupon}
+      } catch (err) {
+        console.tron.log(err);
+      }
+    }
+
+    getCoupons();
+  }, []);
+  
+
   return (
     <>
       <Header />
-      <Categories />
-      <ScrollView style={styles.container}>
-        <Ticket img='https://assets.xtechcommerce.com/uploads/images/medium/a84adebedbfaef7792e23cec2f588ba9.jpg'/>
-        <Ticket img='http://www.tskf.com.br/blog/wp-content/uploads/2018/04/181069-x-curiosidades-sobre-a-culinaria-da-china-para-voce-conhecer.jpg'/>
-        <Ticket img='https://assets.xtechcommerce.com/uploads/images/medium/39635e61742c275e9985781ae5f974ad.jpg' />
-      </ScrollView>
+      <Container>
+        <ListCategories
+          data={coupons}
+          renderItem={({ item }) => <Category />}
+        />
+
+        <ListCoupons
+          data={coupons}
+          renderItem={({ item }) => (
+            <Cupom
+              navigation={navigation}
+              name={item.description}
+              address={item.address}
+            />
+          )}
+        />
+      </Container>
     </>
   );
 }
+
+const propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func,
+  }).isRequired,
+};

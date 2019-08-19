@@ -1,47 +1,50 @@
-import React, { Component } from 'react'
-import { Text, View, Image } from 'react-native'
+import React, { Component } from 'react';
 
-import styles from './styles';
+import {
+  Container,
+  BoxImage,
+  ImageItem,
+  InfoCupom,
+  DetailOnCuponRight,
+  DetailOnCuponLeft,
+  Discount,
+  MoreInfoCupon,
+  Title,
+  Validate,
+  DiscountValue,
+  DiscountPercent,
+} from './styles';
 
-// eslint-disable-next-line react/prefer-stateless-function
-export default class index extends Component {
+class Ticket extends Component {
+  state = {};
+
   render() {
+    const { img } = this.props;
+
     return (
-      <View style={styles.container}>
-        <View style={styles.imageWrapper}>
-          <Image
-            style={{flex: 1}}
-            source={{
-              uri: this.props.img,
-            }}
-          />
+      <Container>
+        <BoxImage>
+          <ImageItem source={{ uri: img }} />
+        </BoxImage>
 
-        </View>
-        <View style={styles.description}>
+        <InfoCupom>
+          <DetailOnCuponLeft />
+          <DetailOnCuponRight />
 
-          <View style={styles.detailLeft} />
-          <View style={styles.detailRight} />
+          <Discount>
+            <DiscountPercent> 20% </DiscountPercent>
+          </Discount>
 
+          <MoreInfoCupon>
+            <Title> Dona Maria </Title>
 
-          <View style={styles.discount}>
-            <Text style={styles.discountPrice}> 20% </Text>
-          </View>
+            <DiscountValue> 20% desconto camiseta </DiscountValue>
 
-          <View style={styles.info}>
-            <Text style={styles.storeName}>
-              Dona Maria
-            </Text>
-
-            <Text style={styles.itemDiscount}>
-              20 % desconto camiseta
-            </Text>
-
-            <Text style={styles.validate}>
-                Valido até 24/09/21 as 13:00
-            </Text>
-          </View>
-        </View>
-      </View>
+            <Validate> Valido até 24/09/21 as 13:00 </Validate>
+          </MoreInfoCupon>
+        </InfoCupom>
+      </Container>
     );
   }
 }
+export default Ticket;
