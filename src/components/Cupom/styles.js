@@ -1,10 +1,10 @@
 import styled from 'styled-components/native';
 
-export const Card = styled.View`
+export const Card = styled.TouchableOpacity`
   height: 200px;
   width: 98%;
-  background-color: #fff;
-  border: 1px solid #ddd;
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 1);
   border-radius: 6px;
   margin-top: 15px;
   margin-bottom: 15px;
@@ -51,7 +51,7 @@ export const ContainerImage = styled.View`
   padding: 10px;
   height: 250px;
   align-self: center;
-  /* border: 1px solid #eee; */
+
   border-radius: 4px;
   margin-top: 30px;
 `;
@@ -98,14 +98,14 @@ export const PriceDiscount = styled.Text`
   color: #7a7680;
   align-items: center;
   margin-top: 15px;
-  margin-left: 120px;
+  margin-left: 118px;
 `;
 
 export const Price = styled.Text`
   color: #320061;
   font-weight: 200;
   font-size: 23px;
-  margin-left: 79px;
+  margin-left: 73px;
   font-family: 'NunitoSans';
 `;
 
@@ -115,6 +115,7 @@ export const StoreDetail = styled.View`
   justify-content: center;
   align-items: center;
   width: 80%;
+
   /* justify-content: space-between; */
 `;
 
@@ -144,6 +145,9 @@ export const CicleDiscount = styled.View`
   z-index: 999;
   justify-content: center;
   align-items: center;
+  border-style: dashed;
+  border-width: 0.8px;
+  border-color: #320061;
 `;
 
 export const TextCicleDiscount = styled.Text`

@@ -15,13 +15,13 @@ import {
   TextCicleDiscount,
 } from './styles';
 
-function Cupom({ navigation }) {
+function Cupom({ navigation, id }) {
   function handleRedirect() {
-    navigation.navigate('DetailCupom');
+    navigation.navigate('DetailCupom', { id });
   }
 
   return (
-    <Card>
+    <Card onPress={handleRedirect}>
       <CicleDiscount>
         <TextCicleDiscount> 50% </TextCicleDiscount>
       </CicleDiscount>

@@ -1,85 +1,98 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { View, Text } from 'react-native';
-
+import { Alert } from 'react-native';
 import {
   Container,
-  HeaderStore,
-  ImageStore,
-  TitleStore,
-  AddresStore,
-  InfoStore,
-  DetailExpiration,
-  CupomRescue,
-  Discount,
-  ValueDiscount,
-  DescriptionDiscount,
-  Hole,
-  RescueCupomButton,
-  WrapperDiscount,
-  TextButton,
-  ImageContainer,
+  Header,
+  HeaderText,
+  ValueText,
+  Content,
+  HeaderContent,
   ImageProduct,
-  ContainerDescription,
+  ContentDetail,
+  ProductName,
+  ProductDescription,
+  Prices,
+  OldPrice,
+  NewPrice,
+  TextWarn,
+  Warn,
+  ImageWarn,
+  TextButton,
+  ButtonRescue,
+  // Product,
+  ImageContainer,
   DescriptionProduct,
-  Product,
 } from './styles';
 
-export default class DetailPucom extends Component {
-  static navigationOptions = {
-    // header: null,
-  };
+import time from '~/assets/img/time.png';
 
-  state = {};
+import api from '~/services/api';
 
-  render() {
-    return (
-      <Container>
-        <HeaderStore>
-          <ImageStore
-            source={{
-              uri: 'https://img.olx.com.br/images/29/293913002523368.jpg',
-            }}
-          />
-          <InfoStore>
-            <TitleStore> Dona Maria </TitleStore>
-            <AddresStore> R.Alberto Vieira Bonfim, 841</AddresStore>
-          </InfoStore>
-        </HeaderStore>
+export default function DetailPucom({ navigation }) {
+  const [cupom, setCupom] = useState({});
 
-        <DetailExpiration>
-          Ao resgatar o cupom, você tem 30 min antes dele expirar, corra ...
-        </DetailExpiration>
+  const id = navigation.getParam('id');
 
-        <CupomRescue>
-          <Hole />
-          <WrapperDiscount>
-            <Discount>
-              <ValueDiscount>20%</ValueDiscount>
-            </Discount>
-            <DescriptionDiscount>
-              De desconto no produto abaixo
-            </DescriptionDiscount>
-          </WrapperDiscount>
-          <RescueCupomButton>
-            <TextButton> Resgatar </TextButton>
-          </RescueCupomButton>
-        </CupomRescue>
+  async function handleGetCupom() {
+    try {
+      const response = await api.post(`coupons/${id}`);
 
-        <Product>
-          <ImageContainer>
-            <ImageProduct
-              source={{
-                uri:
-                  'https://assets.xtechcommerce.com/uploads/images/medium/a84adebedbfaef7792e23cec2f588ba9.jpg',
-              }}
-            />
-          </ImageContainer>
-          <DescriptionProduct>
-            Camiseta Nazaré com 20% desconto.
-          </DescriptionProduct>
-        </Product>
-      </Container>
-    );
+      // navigation.navigate('ConfirmCupom');
+    } catch (e) {
+      Alert.alert('Ocorreu um erro ao resgatar, tente novamente mais tarde');
+    }
   }
+
+  useEffect(() => {
+    async function loadCupom() {
+      try {
+        const response = await api.get(`coupons/${id}`);
+        setCupom(response.data[0]);
+      } catch (e) {
+        Alert.alert('Ocorreu um erro ao carregar cupom');
+      }
+    }
+
+    loadCupom();
+  }, []);
+
+  return (
+    <Container>
+      <Header>
+        <HeaderText> Economize </HeaderText>
+        <ValueText> 30% </ValueText>
+      </Header>
+      <Content>
+        <HeaderContent>
+          <ImageProduct
+            source={{
+              uri:
+                'https://assets.xtechcommerce.com/uploads/images/medium/a84adebedbfaef7792e23cec2f588ba9.jpg',
+            }}
+            resizeMode="cover"
+          />
+        </HeaderContent>
+        <ContentDetail>
+          <ProductName> Camisa NazaRé </ProductName>
+          <ProductDescription>{cupom.description}</ProductDescription>
+          <Prices>
+            <OldPrice> R$ 22,00</OldPrice>
+            <NewPrice> R$ 15,00 </NewPrice>
+          </Prices>
+        </ContentDetail>
+      </Content>
+      <Warn>
+        <ImageWarn source={time} />
+        <TextWarn>
+          Após clicar em resgatar cupom, você tem 30 minutos para apresentar a
+          loja antes de expirar, vai perder essa promoção?
+        </TextWarn>
+      </Warn>
+
+      <ButtonRescue onPress={handleGetCupom}>
+        <TextButton> Eu QUEROO! </TextButton>
+      </ButtonRescue>
+    </Container>
+  );
 }

@@ -14,12 +14,17 @@ import {
 import Home from '~/pages/Home';
 import Stores from '~/pages/Stores';
 import MyProfile from '~/pages/MyProfile';
+
 import DetailCupom from '~/pages/DetailPucom';
+import ConfirmCupom from '~/pages/ConfirmCupom';
+import MyCupons from '~/pages/MyCupons';
 
 import Register from '~/pages/Register';
 import SignInScreen from '~/pages/SignInScreen';
 
 import SignIn from '~/pages/SignIn';
+
+import DetailStore from '~/pages/DetailStore';
 
 const AppStack = createBottomTabNavigator(
   {
@@ -31,7 +36,7 @@ const AppStack = createBottomTabNavigator(
 
         // eslint-disable-next-line react/prop-types
         tabBarIcon: ({ tintColor }) => (
-          <Icon size={24} name="ticket-alt" style={{ color: tintColor }} />
+          <Icon size={20} name="ticket-alt" style={{ color: tintColor }} />
         ),
       },
     },
@@ -42,18 +47,18 @@ const AppStack = createBottomTabNavigator(
         title: 'Stores',
         // eslint-disable-next-line react/prop-types
         tabBarIcon: ({ tintColor }) => (
-          <Icon size={24} name="search" style={{ color: tintColor }} />
+          <Icon size={20} name="search" style={{ color: tintColor }} />
         ),
       },
     },
 
     Maps: {
-      screen: Stores,
+      screen: MyCupons,
       navigationOptions: {
-        title: 'Stores',
+        title: 'MyCupons',
         // eslint-disable-next-line react/prop-types
         tabBarIcon: ({ tintColor }) => (
-          <Icon size={24} name="map-marked-alt" style={{ color: tintColor }} />
+          <Icon size={20} name="list" style={{ color: tintColor }} />
         ),
       },
     },
@@ -64,7 +69,7 @@ const AppStack = createBottomTabNavigator(
         title: 'Meu Perfil',
         // eslint-disable-next-line react/prop-types
         tabBarIcon: ({ tintColor }) => (
-          <Icon size={24} name="user-alt" style={{ color: tintColor }} />
+          <Icon size={20} name="user-alt" style={{ color: tintColor }} />
         ),
       },
     },
@@ -102,11 +107,16 @@ export default (isSigned = false) =>
       {
         App: AppStack,
         Auth: AuthStack,
+        DetailStore,
         DetailCupom,
+        ConfirmCupom,
       },
       {
         defaultNavigationOptions: {
           header: null,
+        },
+        cardStyle: {
+          backgroundColor: '#320061',
         },
       },
       {

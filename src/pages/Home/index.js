@@ -15,14 +15,12 @@ export default function Home({ navigation }) {
   useEffect(() => {
     async function getCoupons() {
       try {
-        const response = await api.get('coupon/index');
+        const response = await api.get('coupons');
         const allCoupons = response.data;
 
         if (allCoupons.status) {
-          setCoupons(allCoupons.coupons.data);
+          setCoupons(allCoupons.data);
         }
-
-        // const { coupon}
       } catch (err) {
         console.tron.log(err);
       }
@@ -30,7 +28,6 @@ export default function Home({ navigation }) {
 
     getCoupons();
   }, []);
-  
 
   return (
     <>
@@ -48,6 +45,7 @@ export default function Home({ navigation }) {
               navigation={navigation}
               name={item.description}
               address={item.address}
+              id={item.id}
             />
           )}
         />

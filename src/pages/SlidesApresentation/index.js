@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Carousel from 'react-native-banner-carousel';
-import {
-  StyleSheet, Image, View, Dimensions, Text,
-} from 'react-native';
+import { StyleSheet, Image, View, Dimensions, Text } from 'react-native';
 
 import search from '../../assets/img/slides/2.png';
 import sentada from '../../assets/img/slides/sentada.jpg';
@@ -40,7 +38,13 @@ export default class SlidesApresentation extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Carousel autoplay autoplayTimeout={55000} loop index={0} pageSize={BannerWidth}>
+        <Carousel
+          autoplay
+          autoplayTimeout={55000}
+          loop
+          index={0}
+          pageSize={BannerWidth}
+        >
           {images.map((image, index) => this.renderPage(image, index))}
         </Carousel>
       </View>
