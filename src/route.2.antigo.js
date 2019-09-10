@@ -103,18 +103,24 @@ const AuthStack = createSwitchNavigator(
 
 export default (isSigned = false) =>
   createAppContainer(
-    createSwitchNavigator(
+    createStackNavigator(
       {
-        Sign: createSwitchNavigator({
-          SignIn,
-          Register,
-        }),
-        App: createBottomTabNavigator({
-          Home,
-        }),
+        App: AppStack,
+        Auth: AuthStack,
+        DetailStore,
+        DetailCupom,
+        ConfirmCupom,
       },
       {
-        initialRouteName: isSigned ? 'App' : 'Sign',
+        defaultNavigationOptions: {
+          header: null,
+        },
+        cardStyle: {
+          backgroundColor: '#320061',
+        },
+      },
+      {
+        initialRouteName: isSigned ? 'App' : 'Auth',
       }
     )
   );

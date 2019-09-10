@@ -3,8 +3,8 @@ import styled from 'styled-components/native';
 export const Card = styled.TouchableOpacity`
   height: 200px;
   width: 98%;
-  background: rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(0, 0, 0, 1);
+  background-color: #fff;
+  border: 1px solid #ddd;
   border-radius: 6px;
   margin-top: 15px;
   margin-bottom: 15px;
@@ -51,7 +51,7 @@ export const ContainerImage = styled.View`
   padding: 10px;
   height: 250px;
   align-self: center;
-
+  /* border: 1px solid #eee; */
   border-radius: 4px;
   margin-top: 30px;
 `;
@@ -88,7 +88,7 @@ export const TextButton = styled.Text`
 `;
 
 export const Details = styled.View`
-  background: rgba(50, 0, 97, 0.1);
+  background: rgba(255, 255, 255, 0.8);
   flex: 1;
   align-items: center;
 `;

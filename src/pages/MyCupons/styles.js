@@ -17,6 +17,7 @@ export const BackCard = styled.TouchableOpacity`
   width: 100%;
   height: 470;
   background: #fff;
+  /* padding: 20px; */
   border-radius: 5;
 `;
 
@@ -102,4 +103,41 @@ export const SeeMore = styled.Text`
   margin-top: 20px;
   color: #fff;
   align-self: center;
+`;
+
+// Back card
+
+export const ContainerBackCard = styled.View`
+  padding: 20px;
+  background: #fff;
+`;
+
+export const NameLocale = styled.Text`
+  margin-top: 10px;
+  font-size: 18px;
+  /* font-weight: bold; */
+  color: #333;
+`;
+
+export const Address = styled.Text`
+  /* margin-top: 10px; */
+`;
+
+export const Map = styled.TouchableOpacity`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+`;
+
+export const TextMaps = styled.Text`
+  color: #320061;
+`;
+
+export const Separator = styled.View`
+  border-width: 1px;
+  /* borderRadius: 5px, */
+  border-style: dashed;
+  margin-top: 70px;
+  border-color: #320061;
 `;

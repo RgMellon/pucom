@@ -1,6 +1,8 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+import openMap from 'react-native-open-maps';
+
 import {
   Container,
   MyCard,
@@ -12,9 +14,18 @@ import {
   TimeExpirate,
   DateExpire,
   SeeMore,
+  NameLocale,
+  ContainerBackCard,
+  Address,
+  Map,
+  TextMaps,
+  Separator,
 } from './styles';
 
 export default function MyCupons() {
+  function goTo() {
+    openMap({ latitude: 37.865101, longitude: -119.53833 });
+  }
   return (
     <Container>
       <MyCard ref={card => (this.card = card)}>
@@ -34,11 +45,25 @@ export default function MyCupons() {
           </TimeExpirate>
 
           <SeeMore>
-            {' '}
             Veja mais <Icon name="chevron-right" />{' '}
           </SeeMore>
         </FrontCard>
-        <BackCard activeOpacity={1} onPress={() => this.card.flip()} />
+        <BackCard activeOpacity={1} onPress={() => this.card.flip()}>
+          <ImageCupom
+            source={{
+              uri:
+                'http://statig2.akamaized.net/bancodeimagens/du/2e/fb/du2efb7zjw7wcilqg6pbgqwkh.jpg',
+            }}
+          />
+          <ContainerBackCard>
+            <NameLocale> Casas Bahia </NameLocale>
+            <Map onPress={goTo}>
+              <Address> R. Alberto Vieira Bonfim, 841 </Address>
+              <TextMaps> Ver no Maps </TextMaps>
+            </Map>
+          </ContainerBackCard>
+          <Separator />
+        </BackCard>
       </MyCard>
     </Container>
   );

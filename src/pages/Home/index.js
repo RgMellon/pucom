@@ -8,6 +8,7 @@ import { Container, ListCategories, ListCoupons } from './styles';
 import Cupom from '../../components/Cupom';
 import Category from '../../components/Category';
 import Header from '~/components/Header';
+import Background from '~/components/Background';
 
 export default function Home({ navigation }) {
   const [coupons, setCoupons] = useState([]);
