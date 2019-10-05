@@ -15,36 +15,43 @@ import {
   TextCicleDiscount,
 } from './styles';
 
-function Cupom({ navigation, id }) {
+function Cupom({
+  navigation,
+  id,
+  name,
+  storeName,
+  priceDiscount,
+  price,
+  discount,
+  shopImage,
+  imgCupom,
+}) {
   function handleRedirect() {
+    console.tron.log(id);
     navigation.navigate('DetailCupom', { id });
   }
 
   return (
     <Card onPress={handleRedirect}>
       <CicleDiscount>
-        <TextCicleDiscount> 50% </TextCicleDiscount>
+        <TextCicleDiscount> {discount} </TextCicleDiscount>
       </CicleDiscount>
       <ImageProduct
         source={{
-          uri:
-            'https://assets.xtechcommerce.com/uploads/images/medium/a84adebedbfaef7792e23cec2f588ba9.jpg',
+          uri: imgCupom,
         }}
       />
       <Details>
         <Discount>
-          <PriceDiscount> R$ {parseFloat(22.9).toFixed(2)} </PriceDiscount>
-          <Price> R$ {parseFloat(18).toFixed(2)} </Price>
+          <PriceDiscount>
+            R$ {parseFloat(priceDiscount).toFixed(2)}
+          </PriceDiscount>
+          <Price> R$ {parseFloat(price).toFixed(2)} </Price>
         </Discount>
-        <ProductName> Camiseta Naza ...</ProductName>
+        <ProductName> {name} </ProductName>
         <StoreDetail>
-          <IconStore
-            source={{
-              uri:
-                'https://2.kekantoimg.com/WhIqGyB9nYyQcKPuY82yx4y1PiU=/fit-in/600x600/s3.amazonaws.com/kekanto_pics/pics/934/193934.jpg',
-            }}
-          />
-          <StoreName> Loja do Galo </StoreName>
+          <IconStore source={{ uri: shopImage }} />
+          <StoreName> {storeName} </StoreName>
         </StoreDetail>
       </Details>
     </Card>

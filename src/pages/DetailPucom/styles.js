@@ -1,156 +1,146 @@
-import LinearGradient from 'react-native-linear-gradient';
 import styled from 'styled-components/native';
+import { RectButton } from 'react-native-gesture-handler';
 
 export const Container = styled.ScrollView`
   flex: 1;
-  background-color: #fff;
-  border-top-right-radius: 20px;
-  border-top-left-radius: 20px;
+  background: #320061;
 `;
 
-export const Header = styled(LinearGradient).attrs({
-  colors: ['#320061', '#954cbf'],
-})`
+export const Header = styled.View`
+  height: 300px;
   width: 100%;
-  height: 180px;
-  /* padding: 10px; */
+  background: #fff;
+
+  justify-content: center;
+  align-items: center;
 `;
 
-export const HeaderText = styled.Text`
-  color: #fff;
-  font-size: 30px;
-  text-align: center;
-  margin-top: 40px;
-  font-weight: 600;
-`;
+export const ContainerImage = styled.View`
+  width: 250px;
+  height: 250px;
+  border-radius: 125px;
+  background: #efefef;
 
-export const ValueText = styled.Text`
-  color: #fff;
-  font-size: 40px;
-  text-align: center;
-  font-weight: bold;
-`;
-
-export const Product = styled.View`
-  width: 95%;
-  align-self: center;
-  background-color: #d1caca;
-  height: 400px;
-  /* margin-top: 120px; */
-  border-radius: 4px;
-  margin-bottom: 10px;
-  display: flex;
-  flex-direction: row;
-`;
-
-export const ImageContainer = styled.View`
-  border: 1px solid #fafafa;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const ImageProduct = styled.Image`
-  padding-top: 10px;
-  align-self: center;
-  width: 70%;
-  height: 300px;
-  background: red;
+  width: 246px;
+  height: 246px;
+  border-radius: 200px;
 `;
 
 export const Content = styled.View`
-  margin-top: 20px;
-  width: 90%;
-  border: 1px solid #eeee;
-  /* height: 500px; */
-  align-self: center;
-  margin-bottom: 40px;
+  /* margin-top: 35px; */
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  padding: 20px;
+  background: #320061;
 `;
 
-export const HeaderContent = styled.View`
-  width: 100%;
-  background: #fff;
-  height: 300px;
+export const Separator = styled.View`
+  border-width: 0.3px;
+  /* borderRadius: 5px, */
+  border-style: dashed;
+  margin-top: 40px;
+  margin-bottom: 5px;
+  border-color: rgba(255, 255, 255, 0.5);
 `;
 
 export const ProductName = styled.Text`
-  font-size: 28px;
-  font-weight: bold;
+  margin-top: 40px;
+  font-size: 20px;
+  color: #fff;
   text-align: center;
-  color: #333;
-  margin-top: 20px;
+  line-height: 40px;
+  font-weight: 100;
+  opacity: 0.8;
 `;
 
-export const ContentDetail = styled.View`
-  /* margin-top: 20px; */
-  padding: 10px;
-`;
-
-export const ProductDescription = styled.Text`
-  font-size: 13px;
-  color: #999;
-  margin-top: 20px;
-`;
-
-export const Prices = styled.View`
+export const ContentOff = styled.View`
   flex-direction: row;
-  margin-top: 20px;
-  justify-content: space-around;
   align-items: center;
+  justify-content: center;
+  margin-top: 40px;
+`;
+
+export const OffText = styled.Text`
+  color: #fff;
+  opacity: 0.8;
+  font-size: 14px;
+`;
+
+export const OffStoreName = styled.Text`
+  color: #fff;
+  font-size: 16px;
+`;
+
+export const ContentOldPrice = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
 `;
 
 export const OldPrice = styled.Text`
+  color: #fff;
+  opacity: 0.8;
   font-size: 14px;
 `;
-
-export const NewPrice = styled.Text`
-  font-size: 19px;
-  color: #320061;
-  font-weight: bold;
+export const Discount = styled.Text`
+  color: #fff;
+  font-size: 16px;
 `;
 
-// Area Warn
-export const Warn = styled.View`
-  margin: 0px 20px 20px 20px;
-  padding: 20px;
-  background: #dec534;
-  border: 1px solid #eee;
-  border-radius: 4px;
-
-  flex-direction: row;
-  justify-content: space-between;
+export const PriceWithDiscount = styled.Text`
+  margin-top: 30px;
+  font-size: 40px;
+  color: #fff;
+  text-align: center;
 `;
 
-export const ImageWarn = styled.Image`
-  width: 100px;
-  height: 100px;
-  border-radius: 4px;
+export const Warn = styled.Text`
+  margin-top: 40px;
+  font-size: 30px;
+  text-align: center;
+  color: #fff;
 `;
 
 export const TextWarn = styled.Text`
-  color: white;
-  margin-top: 4px;
-  line-height: 19;
-  margin-left: 10px;
-  margin-right: 95px;
-  font-weight: 500;
+  margin-top: 20px;
+  opacity: 0.6;
+  font-size: 16px;
+  color: #fff;
+  text-align: center;
+  line-height: 30px;
+  margin-bottom: 40px;
 `;
 
-export const ButtonRescue = styled.TouchableOpacity`
-  height: 50px;
-  width: 70%;
-  align-self: center;
-  background: red;
-  border-radius: 4px;
-  background: #320061;
+export const Footer = styled.View`
+  height: 63px;
+  width: 100%;
+  background: #fff;
+
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+
   justify-content: center;
   align-items: center;
-  margin-top: 30px;
-  margin-bottom: 20px;
+`;
+
+export const ConfirmButton = styled(RectButton)`
+  height: 58px;
+  width: 90%;
+  background: #fff;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const TextButton = styled.Text`
-  color: #fff;
-  font-size: 14px;
-  font-weight: bold;
+  color: #320061;
+  font-size: 18px;
+  font-weight: 100;
 `;
-
-// expo;
-// Fim area Warn

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import Icon from 'react-native-vector-icons/FontAwesome5';
+
 import PropTypes from 'prop-types';
 
 import api from '~/services/api';
@@ -20,7 +22,20 @@ export default function Home({ navigation }) {
         const allCoupons = response.data;
 
         if (allCoupons.status) {
-          setCoupons(allCoupons.data);
+          const couponsList = allCoupons.data.map(item => ({
+            ...item,
+            formatedDiscount:
+              item.type === 'percentage'
+                ? `${item.discount}%`
+                : `${item.discount}R$`,
+
+            formatedTitle:
+              item.title.length > 10
+                ? `${item.title.substr(0, 10)}...`
+                : item.title,
+          }));
+
+          setCoupons(couponsList);
         }
       } catch (err) {
         console.tron.log(err);
@@ -34,19 +49,25 @@ export default function Home({ navigation }) {
     <>
       <Header />
       <Container>
-        <ListCategories
+        {/* <ListCategories
           data={coupons}
           renderItem={({ item }) => <Category />}
-        />
+        /> */}
 
         <ListCoupons
           data={coupons}
           renderItem={({ item }) => (
             <Cupom
               navigation={navigation}
-              name={item.description}
+              name={item.formatedTitle}
               address={item.address}
               id={item.id}
+              storeName={item.fantasy_name}
+              priceDiscount={item.price}
+              price={item.value}
+              discount={item.formatedDiscount}
+              shopImage={item.shop_image}
+              imgCupom={item.image}
             />
           )}
         />
@@ -59,4 +80,12 @@ const propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func,
   }).isRequired,
+};
+
+Home.navigationOptions = {
+  tabBarLabel: 'Home',
+
+  tabBarIcon: ({ tintColor }) => (
+    <Icon size={18} name="ticket-alt" color={tintColor} />
+  ),
 };

@@ -1,98 +1,117 @@
 import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, Alert } from 'react-native';
+import api from '~/services/api';
 
-import { Alert } from 'react-native';
 import {
   Container,
   Header,
-  HeaderText,
-  ValueText,
-  Content,
-  HeaderContent,
+  ContainerImage,
   ImageProduct,
-  ContentDetail,
+  Content,
+  Separator,
   ProductName,
-  ProductDescription,
-  Prices,
+  ContentOff,
+  OffText,
+  OffStoreName,
+  ContentOldPrice,
   OldPrice,
-  NewPrice,
-  TextWarn,
+  Discount,
+  PriceWithDiscount,
   Warn,
-  ImageWarn,
+  TextWarn,
+  Footer,
+  ConfirmButton,
   TextButton,
-  ButtonRescue,
-  // Product,
-  ImageContainer,
-  DescriptionProduct,
 } from './styles';
-
-import time from '~/assets/img/time.png';
-
-import api from '~/services/api';
 
 export default function DetailPucom({ navigation }) {
   const [cupom, setCupom] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const id = navigation.getParam('id');
-
-  async function handleGetCupom() {
-    try {
-      const response = await api.post(`coupons/${id}`);
-
-      // navigation.navigate('ConfirmCupom');
-    } catch (e) {
-      Alert.alert('Ocorreu um erro ao resgatar, tente novamente mais tarde');
-    }
-  }
 
   useEffect(() => {
     async function loadCupom() {
       try {
         const response = await api.get(`coupons/${id}`);
-        setCupom(response.data[0]);
+        setCupom(response.data);
+        setLoading(false);
       } catch (e) {
-        Alert.alert('Ocorreu um erro ao carregar cupom');
+        console.tron.log(e);
       }
     }
 
     loadCupom();
   }, []);
 
-  return (
-    <Container>
-      <Header>
-        <HeaderText> Economize </HeaderText>
-        <ValueText> 30% </ValueText>
-      </Header>
-      <Content>
-        <HeaderContent>
-          <ImageProduct
-            source={{
-              uri:
-                'https://assets.xtechcommerce.com/uploads/images/medium/a84adebedbfaef7792e23cec2f588ba9.jpg',
-            }}
-            resizeMode="cover"
-          />
-        </HeaderContent>
-        <ContentDetail>
-          <ProductName> Camisa NazaRé </ProductName>
-          <ProductDescription>{cupom.description}</ProductDescription>
-          <Prices>
-            <OldPrice> R$ 22,00</OldPrice>
-            <NewPrice> R$ 15,00 </NewPrice>
-          </Prices>
-        </ContentDetail>
-      </Content>
-      <Warn>
-        <ImageWarn source={time} />
-        <TextWarn>
-          Após clicar em resgatar cupom, você tem 30 minutos para apresentar a
-          loja antes de expirar, vai perder essa promoção?
-        </TextWarn>
-      </Warn>
+  async function handleGetCupom() {
+    setLoading(true);
+    try {
+      const response = await api.post(`coupons/${id}`);
+      if (response.data.status === false) {
+        navigation.navigate('RegisterInfos');
+      }
+      // navigation.navigate('ConfirmCupom');
+    } catch (e) {
+      setLoading(false);
 
-      <ButtonRescue onPress={handleGetCupom}>
-        <TextButton> Eu QUEROO! </TextButton>
-      </ButtonRescue>
-    </Container>
+      // console.tron.log(response.data.status);
+    }
+  }
+
+  return (
+    <>
+      <Container>
+        <Header>
+          <ContainerImage>
+            <ImageProduct
+              resizeMode="contain"
+              source={{
+                uri: cupom.image,
+              }}
+            />
+          </ContainerImage>
+        </Header>
+        <Content>
+          <ProductName>{cupom.title}</ProductName>
+
+          <Separator />
+
+          <ContentOff>
+            <OffText> Oferta de </OffText>
+            <OffStoreName> {cupom.fantasy_name} </OffStoreName>
+          </ContentOff>
+
+          <ContentOldPrice>
+            <OldPrice> R$ {cupom.price} </OldPrice>
+            <Discount> ({cupom.discount} de desconto) </Discount>
+          </ContentOldPrice>
+
+          <PriceWithDiscount> R$ {cupom.value} </PriceWithDiscount>
+
+          <Separator />
+
+          <Warn> Aviso </Warn>
+          <TextWarn>
+            Ao clicar em resgatar você tem {cupom.minutes} minutos para pegar na
+            lojas
+          </TextWarn>
+        </Content>
+
+        <Footer>
+          <ConfirmButton onPress={handleGetCupom}>
+            {loading ? (
+              <ActivityIndicator size="small" color="#320061" />
+            ) : (
+              <TextButton> Resgatar </TextButton>
+            )}
+          </ConfirmButton>
+        </Footer>
+      </Container>
+    </>
   );
 }
+
+DetailPucom.defaultNavigationOptions = {
+  headerTransparent: true,
+};

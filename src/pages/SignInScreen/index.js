@@ -14,7 +14,7 @@ import {
 
 import logo from '~/assets/img/logo.png';
 
-function SignInScreen({ navigation }) {
+export default function SignInScreen({ navigation }) {
   // async function signInAsync() {
   //   await AsyncStorage.setItem('userToken', 'abc');
   //   this.props.navigation.navigate('App');
@@ -45,4 +45,6 @@ function SignInScreen({ navigation }) {
   );
 }
 
-export default SignInScreen;
+SignInScreen.navigationOptions = {
+  header: null,
+};
