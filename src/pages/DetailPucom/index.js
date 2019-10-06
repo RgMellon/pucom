@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Alert } from 'react-native';
+import { ActivityIndicator, ToastAndroid } from 'react-native';
 import api from '~/services/api';
 
 import {
@@ -48,14 +48,27 @@ export default function DetailPucom({ navigation }) {
     setLoading(true);
     try {
       const response = await api.post(`coupons/${id}`);
-      if (response.data.status === false) {
-        navigation.navigate('RegisterInfos');
+      if (response.data.take) {
+        ToastAndroid.show(
+          'Você ja pegou esse cupom, veja na sua lista',
+          ToastAndroid.SHORT
+        );
+
+        setLoading(false);
+        return;
       }
-      // navigation.navigate('ConfirmCupom');
+
+      if (response.data.status === false) {
+        navigation.navigate('RegisterInfos', { id });
+        return;
+      }
+      navigation.navigate('SuccessGetCupom');
     } catch (e) {
       setLoading(false);
-
-      // console.tron.log(response.data.status);
+      ToastAndroid.show(
+        'Falha ao pegar cupom, tente novamente mais tarde',
+        ToastAndroid.SHORT
+      );
     }
   }
 
