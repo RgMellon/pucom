@@ -6,7 +6,7 @@ export const Container = styled(LinearGradient).attrs({
 })`
   flex: 1;
   align-items: center;
-  padding: 20px;
+  /* padding: 20px; */
 `;
 
 export const ImageCongratulations = styled.Image`
@@ -14,8 +14,8 @@ export const ImageCongratulations = styled.Image`
   height: 300px;
   align-self: center;
   border-radius: 4px;
-  margin-top: 20px;
-  border: 1px solid;
+  /* margin-top: 20px; */
+  /* border: 1px solid #e6e6e6; */
 `;
 
 export const TextCongratulations = styled.Text`
@@ -23,6 +23,7 @@ export const TextCongratulations = styled.Text`
   font-size: 19px;
   text-align: center;
   margin-top: 40px;
+  line-height: 30px;
 `;
 
 export const CodDiscount = styled.Text`
@@ -30,4 +31,10 @@ export const CodDiscount = styled.Text`
   margin-top: 40px;
   color: white;
   font-weight: bold;
+`;
+
+export const Header = styled.View`
+  width: 100%;
+  height: 300px;
+  background: #fff;
 `;

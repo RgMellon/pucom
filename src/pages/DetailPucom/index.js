@@ -62,7 +62,10 @@ export default function DetailPucom({ navigation }) {
         navigation.navigate('RegisterInfos', { id });
         return;
       }
-      navigation.navigate('SuccessGetCupom');
+
+      const { expirated_at: expiratedAt, coupon } = response.data;
+      setLoading(false);
+      navigation.navigate('ConfirmCupom', { expiratedAt, coupon });
     } catch (e) {
       setLoading(false);
       ToastAndroid.show(

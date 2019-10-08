@@ -19,7 +19,6 @@ import DetailCupom from '~/pages/DetailPucom';
 import ConfirmCupom from '~/pages/ConfirmCupom';
 import MyCupons from '~/pages/MyCupons';
 import RegisterInfos from '~/pages/RegisterInfos';
-import SuccessGetCupom from '~/pages/SuccessGetCupom';
 
 import Register from '~/pages/Register';
 import SignInScreen from '~/pages/SignInScreen';
@@ -36,7 +35,6 @@ export default (isSigned = false) =>
           SignInScreen,
           Register,
           SignIn,
-          SuccessGetCupom,
         }),
 
         App: createStackNavigator(
@@ -44,6 +42,7 @@ export default (isSigned = false) =>
             Tab: {
               screen: createBottomTabNavigator(
                 {
+                  // ConfirmCupom,
                   Home,
                   Stores,
                 },
@@ -63,6 +62,7 @@ export default (isSigned = false) =>
             },
             DetailCupom,
             RegisterInfos,
+            ConfirmCupom,
           },
           {
             defaultNavigationOptions: {

@@ -1,23 +1,32 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import {
   Container,
   ImageCongratulations,
   TextCongratulations,
   CodDiscount,
+  Header,
 } from './styles';
 
 import happy from '~/assets/img/happy.png';
 
-export default function ConfirmCupom() {
+export default function ConfirmCupom({ navigation }) {
+  const expiratedAt = navigation.getParam('expiratedAt');
+  const codCupom = navigation.getParam('coupon');
+
   return (
     <Container>
-      <ImageCongratulations source={happy} />
+      <Header>
+        <ImageCongratulations source={happy} />
+      </Header>
       <TextCongratulations>
-        Ebaaaa, seu cupom já foi resgatado, leve até a loja e apresente o código
+        Ebaaaa, seu cupom já foi pego, leve até a loja e apresente o código
         abaixo para receber o DESCONTO
       </TextCongratulations>
-      <CodDiscount> #EE245@f34</CodDiscount>
+
+      <CodDiscount>
+        {expiratedAt} {codCupom}
+      </CodDiscount>
     </Container>
   );
 }

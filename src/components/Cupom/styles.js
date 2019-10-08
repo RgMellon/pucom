@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 
 export const Card = styled.TouchableOpacity`
   height: 200px;
-  width: 98%;
+  width: 100%;
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 6px;
@@ -62,6 +62,8 @@ export const ImageProduct = styled.Image.attrs({
   margin: 10px;
   width: 150px;
   height: 150px;
+  border-radius: 4px;
+  border: 1px #e6e6e6;
 `;
 
 export const Discount = styled.View``;
@@ -97,15 +99,15 @@ export const PriceDiscount = styled.Text`
   font-size: 14px;
   color: #7a7680;
   align-items: center;
-  margin-top: 15px;
-  margin-left: 118px;
+  margin-top: 25px;
+  margin-left: 50%;
 `;
 
 export const Price = styled.Text`
   color: #320061;
   font-weight: 200;
   font-size: 23px;
-  margin-left: 73px;
+  margin-left: 20%;
   font-family: 'NunitoSans';
 `;
 
@@ -136,8 +138,8 @@ export const IconStore = styled.Image`
 
 export const CicleDiscount = styled.View`
   border-radius: 50px;
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   background: #dec534;
   position: absolute;
   left: 145;

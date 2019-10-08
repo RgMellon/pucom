@@ -122,10 +122,14 @@ export default function RegisterInfos({ navigation }) {
           setLoadSubmit(false);
           return;
         }
+
+        const { expirated_at: expiratedAt, coupon } = res.data;
+        console.tron.log(response.data);
+        navigation.navigate('ConfirmCupom', { expiratedAt, coupon });
+        setLoadSubmit(false);
       }
 
       setLoadSubmit(false);
-      navigation.navigate('SuccessGetCupom');
     } catch (e) {
       setLoadSubmit(false);
       ToastAndroid.show(
@@ -189,7 +193,7 @@ export default function RegisterInfos({ navigation }) {
           <Picker.Item value="0" label="Sexo" />
           <Picker.Item label="Masculino" value="masculine" />
           <Picker.Item label="Feminino" value="feminine" />
-          <Picker.Item label="Não binario" value="feminine" />
+          <Picker.Item label="Não binario" value="non-binary" />
         </ContainerPicker>
 
         <Label> Data de nascimento </Label>
