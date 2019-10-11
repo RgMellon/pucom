@@ -42,8 +42,8 @@ export default (isSigned = false) =>
             Tab: {
               screen: createBottomTabNavigator(
                 {
-                  // ConfirmCupom,
                   Home,
+                  MyCupons,
                   Stores,
                 },
                 {
@@ -63,6 +63,7 @@ export default (isSigned = false) =>
             DetailCupom,
             RegisterInfos,
             ConfirmCupom,
+            DetailStore,
           },
           {
             defaultNavigationOptions: {

@@ -42,7 +42,7 @@ export const ListCoupons = styled.FlatList.attrs({
   margin-top: 10px;
 `;
 
-export const Cupom = styled.View`
+export const Cupom = styled.TouchableOpacity`
   width: 300;
   margin: 0 10px 0 10px;
   height: 100;

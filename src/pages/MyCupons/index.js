@@ -1,7 +1,8 @@
-import React from 'react';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import React, { useEffect, useState } from 'react';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import openMap from 'react-native-open-maps';
+import api from '~/services/api';
 
 import {
   Container,
@@ -23,9 +24,24 @@ import {
 } from './styles';
 
 export default function MyCupons() {
+  const [listCoupons, setListCoupons] = useState([]);
+
   function goTo() {
     openMap({ latitude: 37.865101, longitude: -119.53833 });
   }
+
+  useEffect(() => {
+    async function getCuponsTaked() {
+      const response = await api.get('/coupons/take');
+
+      const { coupons } = response.data;
+
+      setListCoupons(coupons);
+    }
+
+    getCuponsTaked();
+  }, []);
+
   return (
     <Container>
       <MyCard ref={card => (this.card = card)}>
@@ -45,7 +61,7 @@ export default function MyCupons() {
           </TimeExpirate>
 
           <SeeMore>
-            Veja mais <Icon name="chevron-right" />{' '}
+            Veja mais <Icon name="angle-right" />
           </SeeMore>
         </FrontCard>
         <BackCard activeOpacity={1} onPress={() => this.card.flip()}>
@@ -68,3 +84,11 @@ export default function MyCupons() {
     </Container>
   );
 }
+
+MyCupons.navigationOptions = {
+  tabBarLabel: 'Meus cupons',
+
+  tabBarIcon: ({ tintColor }) => (
+    <Icon size={18} name="list" color={tintColor} />
+  ),
+};

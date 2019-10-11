@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import HeaderImageScrollView, {
   TriggeringView,
 } from 'react-native-image-header-scroll-view';
 
-import { View, TouchableOpacity } from 'react-native';
-import image from './GIC-0002-014_zoom1.jpg';
+import { View, TouchableOpacity, Image } from 'react-native';
 
 import {
   Container,
@@ -25,14 +24,56 @@ import {
   TitleAddress,
 } from './styles';
 
-export default function DetailStore() {
-  const data = [1, 2, 3, 4, 5, 6];
+import api from '~/services/api';
+
+export default function DetailStore({ navigation }) {
+  const id = navigation.getParam('id');
+
+  const [store, setStore] = useState({});
+  const [coupons, setCoupons] = useState([]);
+
+  useEffect(() => {
+    async function getStore() {
+      const response = await api.get(`shops/${id}`);
+
+      const { data } = response;
+
+      const newData = data.coupons.map(item => ({
+        ...item,
+        formatedTitle:
+          item.title.length > 10
+            ? `${item.title.substr(0, 10)}...`
+            : item.title,
+
+        formatedDesc:
+          item.description.length > 10
+            ? `${item.description.substr(0, 10)}...`
+            : item.description,
+      }));
+
+      setCoupons(newData);
+      setStore(data);
+    }
+
+    getStore();
+  }, []);
+
+  function handleRedirectCupom(idCupom) {
+    navigation.navigate('DetailCupom', { id: idCupom });
+  }
 
   return (
     <HeaderImageScrollView
       maxHeight={200}
       minHeight={100}
-      headerImage={require('./wallpaper.jpg')}
+      renderHeader={() => (
+        <Image
+          source={{
+            uri: store.image,
+          }}
+          style={{ width: '100%', height: 200 }}
+        />
+      )}
       renderForeground={() => (
         <View
           style={{
@@ -45,38 +86,47 @@ export default function DetailStore() {
         </View>
       )}
     >
-      <View style={{ height: 600 }}>
+      <View
+        style={{
+          height: 600,
+          borderTopRightRadius: 10,
+          borderTopLeftRadius: 10,
+        }}
+      >
         <Container>
           <Content>
-            <Title> Casas Bahia </Title>
+            <Title> {store.fantasy_name} </Title>
 
-            <DescStore>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
-              quis mauris pharetra, laoreet turpis id, facilisis sapien.
-              Pellentesque in mi quis tortor rhoncus facilisis quis nec est.
-            </DescStore>
+            <DescStore>{store.description}</DescStore>
 
             <Title> Endereço </Title>
             <Address>
-              Rua do Tiro, Perto da casa da mocinga asoidoadsi saodi saoidsodasi
-              o, nº 22
+              {store.address} {store.district} {store.city} / {store.state}
             </Address>
 
             <Title> Contato </Title>
 
-            <Phone>(18) 99116-1413</Phone>
+            <Phone>{store.phone}</Phone>
 
             <ContainerCupomStore>
               <TitleCupom> Veja mais cupons dessa lojas </TitleCupom>
               <ListCoupons
                 keyExtractor={item => item}
-                data={data}
+                data={coupons}
                 renderItem={({ item }) => (
-                  <Cupom>
-                    <ImageCupom source={image} />
+                  <Cupom
+                    onPress={() => {
+                      handleRedirectCupom(item.id);
+                    }}
+                  >
+                    <ImageCupom
+                      source={{
+                        uri: item.image,
+                      }}
+                    />
                     <Info>
-                      <TitleItem> Tênis bacana </TitleItem>
-                      <DesCupom> lorem ipsum sit amet </DesCupom>
+                      <TitleItem> {item.formatedTitle} </TitleItem>
+                      <DesCupom> {item.formatedDesc} </DesCupom>
                     </Info>
                   </Cupom>
                 )}

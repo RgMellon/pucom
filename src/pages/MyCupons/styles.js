@@ -23,8 +23,9 @@ export const BackCard = styled.TouchableOpacity`
 
 export const Container = styled.View`
   flex: 1;
-  margin: 20px;
+  padding: 20px;
   justify-content: center;
+  background: #320061;
 `;
 
 export const ImageEmpty = styled.Image`

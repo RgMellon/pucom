@@ -10,20 +10,19 @@ import {
   DetailCupom,
 } from './styles';
 
-export default function Store({ handleNavigateStore }) {
+export default function Store({ handleNavigateStore, name, image }) {
   return (
     <Container onPress={handleNavigateStore}>
       <Header>
         <StoreImage
           resizeMode="cover"
           source={{
-            uri:
-              'http://statig2.akamaized.net/bancodeimagens/du/2e/fb/du2efb7zjw7wcilqg6pbgqwkh.jpg',
+            uri: image,
           }}
         />
       </Header>
       <Content>
-        <TitleStore> Casas Bahia</TitleStore>
+        <TitleStore> {name} </TitleStore>
         <DetailCupom>
           <Icon name="receipt" color="#dec534" size={20} />
           <CuponsAvailable> 3 disponíveis </CuponsAvailable>

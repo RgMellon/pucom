@@ -48,6 +48,7 @@ export default function DetailPucom({ navigation }) {
     setLoading(true);
     try {
       const response = await api.post(`coupons/${id}`);
+
       if (response.data.take) {
         ToastAndroid.show(
           'Você ja pegou esse cupom, veja na sua lista',
@@ -64,6 +65,8 @@ export default function DetailPucom({ navigation }) {
       }
 
       const { expirated_at: expiratedAt, coupon } = response.data;
+      console.tron.log(response.data);
+
       setLoading(false);
       navigation.navigate('ConfirmCupom', { expiratedAt, coupon });
     } catch (e) {

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
 import { Keyboard, ActivityIndicator } from 'react-native';
 
 import Icon, {
@@ -11,17 +12,34 @@ import { ListStore, Container, SubmitButton, Form, Input } from './styles';
 import Background from '~/components/Background';
 
 import Store from '~/components/Store';
+import api from '~/services/api';
 
-const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+// const data = useEffect()
 
 export default function Stores({ navigation }) {
   const [loading, setLoading] = useState(false);
   const [textSearch, setTextSearch] = useState('');
+  const [store, setStore] = useState([]);
 
   function handleSubmit() {}
 
-  function handleNavigateStore() {
-    navigation.navigate('DetailStore');
+  useEffect(() => {
+    async function getShops() {
+      try {
+        const response = await api.get('shops');
+        const { shops } = response.data;
+        // console.tron.log(data);
+        setStore(shops);
+      } catch (e) {
+        // console.tron.log(e);
+      }
+    }
+
+    getShops();
+  }, []);
+
+  function handleNavigateStore(id) {
+    navigation.navigate('DetailStore', { id });
   }
 
   return (
@@ -48,9 +66,14 @@ export default function Stores({ navigation }) {
 
         <ListStore
           numColumns={2}
-          data={data}
+          data={store}
+          keyExtractor={item => item.id.toString()}
           renderItem={({ item }) => (
-            <Store handleNavigateStore={() => handleNavigateStore()} />
+            <Store
+              image={item.image}
+              name={item.fantasy_name}
+              handleNavigateStore={() => handleNavigateStore(item.id)}
+            />
           )}
         />
       </Container>
