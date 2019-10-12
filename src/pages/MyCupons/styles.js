@@ -2,13 +2,16 @@ import styled from 'styled-components/native';
 import CardFlip from 'react-native-card-flip';
 
 export const MyCard = styled(CardFlip)`
-  width: 100%;
-  height: 470;
+  width: 380px;
+  height: 550px;
+  margin-top: 40px;
+  /* margin: 40px; */
+  /* background: #fff; */
 `;
 
 export const FrontCard = styled.TouchableOpacity`
   width: 100%;
-  height: 470;
+  height: 550;
   background: rgba(0, 0, 0, 0.1);
   border-radius: 5;
 `;
@@ -84,24 +87,26 @@ export const DescCupom = styled.Text`
   padding: 20px;
 `;
 
-export const TimeExpirate = styled.View`
+export const ContentCode = styled.View`
   align-self: center;
   width: 70%;
   border-radius: 4px;
   border: 1px solid rgba(255, 255, 255, 0.8);
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 30px;
   padding: 10px;
+  border-radius: 4px;
 `;
 
-export const DateExpire = styled.Text`
+export const Code = styled.Text`
   color: #fff;
   font-size: 15px;
 `;
 
-export const SeeMore = styled.Text`
+export const ExpirateTime = styled.Text`
   margin-top: 20px;
+  margin-bottom: 20px;
   color: #fff;
   align-self: center;
 `;
@@ -120,15 +125,20 @@ export const NameLocale = styled.Text`
   color: #333;
 `;
 
+export const DescriptionStore = styled.Text`
+  margin-top: 20px;
+  color: #333;
+  margin-left: 8px;
+`;
+
 export const Address = styled.Text`
   /* margin-top: 10px; */
 `;
 
 export const Map = styled.TouchableOpacity`
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
   margin-top: 20px;
+  margin-left: 8px;
+  width: 90%;
 `;
 
 export const TextMaps = styled.Text`
@@ -141,4 +151,50 @@ export const Separator = styled.View`
   border-style: dashed;
   margin-top: 70px;
   border-color: #320061;
+`;
+
+export const EmptyContent = styled.View`
+  justify-content: center;
+  align-items: center;
+`;
+
+export const ListCouponsTake = styled.FlatList.attrs({
+  // horizontal: true,
+  showsHorizontalScrollIndicator: false,
+})`
+  margin-top: 10px;
+  /* width: 100%; */
+`;
+
+export const ContentVisiStore = styled.TouchableOpacity`
+  width: 60%;
+  height: 50px;
+  border-radius: 80px;
+  border: 1px solid #320061;
+  align-self: center;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+`;
+
+export const TextVisitStore = styled.Text`
+  color: #320061;
+`;
+
+export const ContentPrice = styled.View`
+  width: 100%;
+  flex-direction: row;
+  margin-top: 10px;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const OldPrice = styled.Text`
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.7);
+`;
+
+export const DiscountPrice = styled.Text`
+  font-size: 18px;
+  color: #fafafa;
 `;

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
+import { withNavigationFocus } from 'react-navigation';
+
 import openMap from 'react-native-open-maps';
 import api from '~/services/api';
 
@@ -12,75 +14,114 @@ import {
   ImageCupom,
   TitleCupom,
   DescCupom,
-  TimeExpirate,
-  DateExpire,
-  SeeMore,
+  ContentCode,
+  Code,
+  ExpirateTime,
   NameLocale,
   ContainerBackCard,
+  DescriptionStore,
   Address,
   Map,
-  TextMaps,
-  Separator,
+  ContentVisiStore,
+  TextVisitStore,
+  ContentPrice,
+  OldPrice,
+  DiscountPrice,
+  ListCouponsTake,
 } from './styles';
 
-export default function MyCupons() {
+function MyCupons({ isFocused, navigation }) {
   const [listCoupons, setListCoupons] = useState([]);
 
-  function goTo() {
-    openMap({ latitude: 37.865101, longitude: -119.53833 });
+  // function goTo() {
+  //   openMap({ latitude: 37.865101, longitude: -119.53833 });
+  // }
+
+  function handleRedirectStore(id) {
+    navigation.navigate('DetailStore', { id });
+  }
+
+  async function getCuponsTaked() {
+    const response = await api.get('/coupons/take');
+    const { coupons } = response.data;
+
+    const newData = coupons.map(item => ({
+      ...item,
+      formatedOldPrice: parseFloat(item.price).toFixed(2),
+      formatedNewPrice: parseFloat(item.value).toFixed(2),
+    }));
+
+    setListCoupons(newData);
   }
 
   useEffect(() => {
-    async function getCuponsTaked() {
-      const response = await api.get('/coupons/take');
-
-      const { coupons } = response.data;
-
-      setListCoupons(coupons);
+    if (isFocused) {
+      getCuponsTaked();
     }
-
-    getCuponsTaked();
-  }, []);
+  }, [isFocused]);
 
   return (
     <Container>
-      <MyCard ref={card => (this.card = card)}>
-        <FrontCard activeOpacity={1} onPress={() => this.card.flip()}>
-          <ImageCupom
-            source={{
-              uri:
-                'https://i0.wp.com/www.revistabula.com/wp/wp-content/uploads/2018/06/Virado-a-Paulista.jpg?resize=610%2C350&ssl=1',
-            }}
-          />
-          <TitleCupom> Comida da vó </TitleCupom>
-          <DescCupom>
-            Lorem Ipsum sit a met quer brincar com o dolinho seu amigguinho
-          </DescCupom>
-          <TimeExpirate>
-            <DateExpire> Expira hás 14:00 </DateExpire>
-          </TimeExpirate>
+      <ListCouponsTake
+        keyExtractor={item => item.id.toString()}
+        data={listCoupons}
+        renderItem={({ item }) => (
+          <MyCard ref={card => (this[`card${item.id}`] = card)}>
+            <FrontCard
+              activeOpacity={1}
+              onPress={() => this[`card${item.id}`].flip()}
+            >
+              <ImageCupom
+                source={{
+                  uri: item.image,
+                }}
+              />
+              <TitleCupom> {item.title} </TitleCupom>
+              <DescCupom>
+                Lorem Ipsum sit a met quer brincar com o dolinho seu amigguinho
+              </DescCupom>
 
-          <SeeMore>
-            Veja mais <Icon name="angle-right" />
-          </SeeMore>
-        </FrontCard>
-        <BackCard activeOpacity={1} onPress={() => this.card.flip()}>
-          <ImageCupom
-            source={{
-              uri:
-                'http://statig2.akamaized.net/bancodeimagens/du/2e/fb/du2efb7zjw7wcilqg6pbgqwkh.jpg',
-            }}
-          />
-          <ContainerBackCard>
-            <NameLocale> Casas Bahia </NameLocale>
-            <Map onPress={goTo}>
-              <Address> R. Alberto Vieira Bonfim, 841 </Address>
-              <TextMaps> Ver no Maps </TextMaps>
-            </Map>
-          </ContainerBackCard>
-          <Separator />
-        </BackCard>
-      </MyCard>
+              <ContentPrice>
+                <OldPrice> De R$ {item.formatedOldPrice} </OldPrice>
+                <DiscountPrice> Por R$ {item.formatedNewPrice}</DiscountPrice>
+              </ContentPrice>
+
+              <ContentCode>
+                <Code> {item.coupon} </Code>
+              </ContentCode>
+
+              <ExpirateTime>Expira has 12:20</ExpirateTime>
+            </FrontCard>
+
+            <BackCard
+              activeOpacity={1}
+              onPress={() => this[`card${item.id}`].flip()}
+            >
+              <ImageCupom
+                source={{
+                  uri: item.shop_image,
+                }}
+              />
+              <ContainerBackCard>
+                <NameLocale> {item.fantasy_name} </NameLocale>
+                <DescriptionStore numberOfLines={3}>
+                  {item.description}
+                </DescriptionStore>
+                <Map>
+                  <Address> R. Alberto Vieira Bonfim, 841 </Address>
+                  {/* <TextMaps> Ver no Maps </TextMaps> */}
+                </Map>
+
+                <ContentVisiStore
+                  onPress={() => handleRedirectStore(item.shop_id)}
+                >
+                  <TextVisitStore> Visitar Loja </TextVisitStore>
+                </ContentVisiStore>
+              </ContainerBackCard>
+            </BackCard>
+          </MyCard>
+        )}
+      />
     </Container>
   );
 }
@@ -92,3 +133,5 @@ MyCupons.navigationOptions = {
     <Icon size={18} name="list" color={tintColor} />
   ),
 };
+
+export default withNavigationFocus(MyCupons);
